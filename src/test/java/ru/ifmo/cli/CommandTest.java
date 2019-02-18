@@ -1,4 +1,4 @@
-package ru.ifmo.cli.commands;
+package ru.ifmo.cli;
 
 import org.junit.Before;
 import ru.ifmo.cli.CommandExecutor;

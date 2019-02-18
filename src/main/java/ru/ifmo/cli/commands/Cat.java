@@ -1,5 +1,6 @@
 package ru.ifmo.cli.commands;
 
+import ru.ifmo.cli.Command;
 import ru.ifmo.cli.Environment;
 import ru.ifmo.cli.SyntaxisException;
 

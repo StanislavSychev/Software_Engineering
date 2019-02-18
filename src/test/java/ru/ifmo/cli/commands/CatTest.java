@@ -1,10 +1,11 @@
 package ru.ifmo.cli.commands;
 
 import org.junit.Test;
+import ru.ifmo.cli.CommandTest;
 
 import static org.junit.Assert.*;
 
-public class CatTest extends CommandTest{
+public class CatTest extends CommandTest {
 
     @Test
     public void testCat() {

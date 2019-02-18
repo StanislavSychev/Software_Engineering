@@ -1,5 +1,6 @@
 package ru.ifmo.cli.commands;
 
+import ru.ifmo.cli.Command;
 import ru.ifmo.cli.Environment;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class Echo implements Command {
         for (String arg : args) {
             res.append(arg);
         }
+        res.append("\n");
         return res.toString();
     }
 }

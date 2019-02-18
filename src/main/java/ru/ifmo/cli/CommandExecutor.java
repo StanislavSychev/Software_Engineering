@@ -13,10 +13,12 @@ public class CommandExecutor {
 
     private Environment environment;
     private boolean finished;
+    private ProcessCommand prcessCommand;
 
     public CommandExecutor() {
         environment = new Environment();
         finished = false;
+        prcessCommand = new ProcessCommand();
     }
 
     private static final Map<String, Command> COMMANDS_LIST = new HashMap<String, Command>() {
@@ -55,8 +57,8 @@ public class CommandExecutor {
         if (COMMANDS_LIST.containsKey(command.getContent())) {
             return COMMANDS_LIST.get(command.getContent()).execute(args, environment);
         }
-
-        return null;
+        args.add(0, command.getContent());
+        return prcessCommand.execute(args, environment);
     }
 
     /**
@@ -76,10 +78,10 @@ public class CommandExecutor {
                     commandTokens.add(new Token(res, Token.TokenType.TEXT));
                 }
             }
-            if (finished || res == null) return "";
+            if (finished || res == null) return "\n";
             return res;
         } catch (SyntaxisException e) {
-            return e.getMessage();
+            return e.getMessage() + "\n";
         }
     }
 

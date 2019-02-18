@@ -1,5 +1,6 @@
 package ru.ifmo.cli.commands;
 
+import ru.ifmo.cli.Command;
 import ru.ifmo.cli.Environment;
 import ru.ifmo.cli.SyntaxisException;
 
@@ -17,6 +18,6 @@ public class Pwd implements Command {
         if (!args.isEmpty()) {
             throw new SyntaxisException("too many arguments");
         }
-        return Paths.get(".").toAbsolutePath().toString();
+        return Paths.get(".").toAbsolutePath().toString() + "\n";
     }
 }

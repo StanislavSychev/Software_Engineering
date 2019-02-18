@@ -1,4 +1,4 @@
-package ru.ifmo.cli.commands;
+package ru.ifmo.cli;
 
 import ru.ifmo.cli.Environment;
 

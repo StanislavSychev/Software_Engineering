@@ -1,8 +1,7 @@
 package ru.ifmo.cli.commands;
 
-import org.junit.Before;
 import org.junit.Test;
-import ru.ifmo.cli.CommandExecutor;
+import ru.ifmo.cli.CommandTest;
 
 import static org.junit.Assert.*;
 
