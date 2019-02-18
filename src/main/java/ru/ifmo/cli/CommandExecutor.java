@@ -22,6 +22,9 @@ public class CommandExecutor {
     private static final Map<String, Command> COMMANDS_LIST = new HashMap<String, Command>() {
         {
             put("echo", new Echo());
+            put("pwd", new Pwd());
+            put("wc", new Wc());
+            put("cat", new Cat());
         }
     };
 
