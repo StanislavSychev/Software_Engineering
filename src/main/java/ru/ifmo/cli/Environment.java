@@ -1,4 +1,6 @@
 package ru.ifmo.cli;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -9,6 +11,7 @@ import java.util.regex.Pattern;
  */
 public class Environment {
 
+    private Path currentDirectory = Paths.get(System.getProperty("user.dir"));
     private Map<String, String> variables = new HashMap<>();
 
     /**
@@ -25,5 +28,19 @@ public class Environment {
      */
     public String getValue(String name) {
         return variables.getOrDefault(name, "");
+    }
+
+    /**
+     * @param newDirectory new directory in which interpreter will stay
+     */
+    public void setCurrentDirectory(Path newDirectory) {
+        currentDirectory = newDirectory;
+    }
+
+    /**
+     * @return absolute path to current directory
+     */
+    public Path getCurrentDirectory() {
+        return currentDirectory;
     }
 }

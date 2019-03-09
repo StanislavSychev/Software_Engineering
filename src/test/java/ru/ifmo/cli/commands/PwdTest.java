@@ -9,7 +9,7 @@ public class PwdTest extends CommandTest {
 
     @Test
     public void testFail(){
-        assertEquals("too many arguments", commandExecutor.execCommand("pwd asd"));
+        assertEquals("too many arguments\n", commandExecutor.execCommand("pwd asd"));
     }
 
 }
