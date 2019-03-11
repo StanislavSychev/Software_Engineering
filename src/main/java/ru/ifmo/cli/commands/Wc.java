@@ -14,7 +14,7 @@ public class Wc implements Command {
     public String execute(List<String> args, Environment environment) {
         if (args.size() == 1) {
             try {
-                return count(new String(Files.readAllBytes(Paths.get(args.get(0))), StandardCharsets.UTF_8));
+                return count(new String(Files.readAllBytes(environment.getCurrentDirectory().resolve(args.get(0))), StandardCharsets.UTF_8));
             } catch (IOException e) {
                 return count(args.get(0));
             }
@@ -25,7 +25,7 @@ public class Wc implements Command {
             try {
                 res.append(fileName);
                 res.append(": ");
-                res.append(count(new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8)));
+                res.append(count(new String(Files.readAllBytes(environment.getCurrentDirectory().resolve(fileName).toAbsolutePath()), StandardCharsets.UTF_8)));
             } catch (IOException e) {
                 res = new StringBuilder();
                 for (String part : args) {
