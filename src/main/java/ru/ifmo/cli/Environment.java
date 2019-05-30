@@ -31,6 +31,8 @@ public class Environment {
     }
 
     /**
+     * Sets @currentDirectory in the file system where interpreter is located.
+     *
      * @param newDirectory new directory in which interpreter will stay
      */
     public void setCurrentDirectory(Path newDirectory) {
@@ -38,6 +40,8 @@ public class Environment {
     }
 
     /**
+     * Returns @currentDirectory where interpreter is located right now.
+     *
      * @return absolute path to current directory
      */
     public Path getCurrentDirectory() {

@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Command that is used to change current directory in the interpreter.
+ */
 public class Cd implements Command {
 
     @Override

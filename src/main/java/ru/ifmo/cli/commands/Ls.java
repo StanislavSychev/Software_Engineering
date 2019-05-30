@@ -13,6 +13,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Command that is used to list contents of current directory in which interpreter is located.
+ */
 public class Ls implements Command {
     @Override
     public String execute(List<String> args, Environment environment) {
@@ -41,7 +44,7 @@ public class Ls implements Command {
 
         StringBuilder result = new StringBuilder();
 
-        for (Path path: listOfFiles) {
+        for (Path path : listOfFiles) {
             result.append(path.toAbsolutePath()).append("\n");
         }
 
