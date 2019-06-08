@@ -40,7 +40,7 @@ public class Grep implements Command {
         parameters.clear();
         new JCommander(this, argsArray);
 
-        String regexp = parameters.get(1);
+        String regexp = parameters.get(0);
 
         if (wholeWord) {
             regexp = "( |^)" + regexp + "( |$)";
@@ -55,17 +55,17 @@ public class Grep implements Command {
             throw new SyntaxisException("no file was specified");
         }
         StringBuilder res = new StringBuilder();
-        for (String fileName : parameters.subList(2, parameters.size())) {
+        for (String fileName : parameters.subList(1, parameters.size())) {
             String file;
             try {
                 file = new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8);
             } catch (IOException e) {
                 throw new SyntaxisException("No such file: " + fileName);
             }
-            int linesPrintedAfter = linesNumber + 1;
+            int linesPrintedAfter = linesNumber;
             boolean toPrint;
             for (String line : file.split("\n")) {
-                toPrint = (linesPrintedAfter <= linesNumber);
+                toPrint = (linesPrintedAfter < linesNumber);
                 Matcher matcher = pattern.matcher(line);
                 boolean found = matcher.find();
                 if (found || toPrint) {
