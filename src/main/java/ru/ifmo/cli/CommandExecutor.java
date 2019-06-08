@@ -27,6 +27,7 @@ public class CommandExecutor {
             put("pwd", new Pwd());
             put("wc", new Wc());
             put("cat", new Cat());
+            put("grep", new Grep());
         }
     };
 
