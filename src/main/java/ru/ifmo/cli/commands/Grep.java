@@ -2,6 +2,7 @@ package ru.ifmo.cli.commands;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import ru.ifmo.cli.Command;
 import ru.ifmo.cli.Environment;
 import ru.ifmo.cli.Parser;
@@ -32,14 +33,19 @@ public class Grep implements Command {
 
     @Override
     public String execute(List<String> args, Environment environment) {
-        String[] argsArray = new String[args.size()];
-        args.toArray(argsArray);
+        String[] argsArray = args.toArray(new String[0]);
         wholeWord = false;
         linesNumber = -1;
         caseInsensitive = false;
         parameters.clear();
-        new JCommander(this, argsArray);
-
+        try {
+            JCommander.newBuilder()
+                    .addObject(this)
+                    .build()
+                    .parse(argsArray);
+        } catch (ParameterException e) {
+            throw new SyntaxisException("can't read key parameter");
+        }
         String regexp = parameters.get(0);
 
         if (wholeWord) {
@@ -60,7 +66,11 @@ public class Grep implements Command {
             try {
                 file = new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8);
             } catch (IOException e) {
-                throw new SyntaxisException("No such file: " + fileName);
+                if (parameters.size() == 2) {
+                    file = fileName;
+                } else {
+                    throw new SyntaxisException("No such file: " + fileName);
+                }
             }
             int linesPrintedAfter = linesNumber;
             boolean toPrint;

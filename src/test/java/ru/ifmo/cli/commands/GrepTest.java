@@ -14,6 +14,8 @@ public class GrepTest extends CommandTest {
         assertEquals("asf\nadfsda\nasdg\n", commandExecutor.execCommand("grep -A 1 \"f\" test.txt"));
         assertEquals("asf\nadfsda\n", commandExecutor.execCommand("grep -i \"F\" test.txt"));
         assertEquals("as \n", commandExecutor.execCommand("grep -w -i \"AS\" test.txt"));
+        assertEquals("can't read key parameter\n", commandExecutor.execCommand("grep -A plugin build.gradle"));
+        assertEquals("as \n", commandExecutor.execCommand("cat test.txt | grep -w \"as\""));
     }
 
 }
