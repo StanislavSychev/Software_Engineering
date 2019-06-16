@@ -2,12 +2,11 @@ package ru.ifmo.cli.commands;
 
 import ru.ifmo.cli.Command;
 import ru.ifmo.cli.Environment;
-import ru.ifmo.cli.SyntaxisException;
+import ru.ifmo.cli.NoSuchPathException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class Cat implements Command {
@@ -17,9 +16,9 @@ public class Cat implements Command {
         for (int i = 0; i < args.size(); i++) {
             String fileName = args.get(i);
             try {
-                res.append(new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8));
+                res.append(new String(Files.readAllBytes(environment.getCurrentDirectory().resolve(fileName).toAbsolutePath()), StandardCharsets.UTF_8));
             } catch (IOException e) {
-                throw new SyntaxisException("No such file: " + fileName);
+                throw new NoSuchPathException(fileName + " : no such file or directory");
             }
         }
         return res.toString();

@@ -21,6 +21,8 @@ public class CommandExecutor {
             put("pwd", new Pwd());
             put("wc", new Wc());
             put("cat", new Cat());
+            put("cd", new Cd());
+            put("ls", new Ls());
         }
     };
 
@@ -79,6 +81,9 @@ public class CommandExecutor {
             if (finished || res == null) return "\n";
             return res;
         } catch (SyntaxisException e) {
+            return e.getMessage() + "\n";
+        }
+        catch (NoSuchPathException e) {
             return e.getMessage() + "\n";
         }
     }

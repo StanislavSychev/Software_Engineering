@@ -18,6 +18,6 @@ public class Pwd implements Command {
         if (!args.isEmpty()) {
             throw new SyntaxisException("too many arguments");
         }
-        return Paths.get(".").toAbsolutePath().toString() + "\n";
+        return environment.getCurrentDirectory() + "\n";
     }
 }
