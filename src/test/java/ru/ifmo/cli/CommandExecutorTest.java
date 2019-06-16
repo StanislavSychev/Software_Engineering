@@ -16,9 +16,9 @@ public class CommandExecutorTest {
     public void testAssign() {
         commandExecutor.execCommand("a=1");
         commandExecutor.execCommand("b='123'");
-        assertEquals("1", commandExecutor.execCommand("echo $a"));
-        assertEquals("123", commandExecutor.execCommand("echo $b"));
-        assertEquals("empty assignment", commandExecutor.execCommand("a="));
+        assertEquals("1\n", commandExecutor.execCommand("echo $a"));
+        assertEquals("123\n", commandExecutor.execCommand("echo $b"));
+        assertEquals("empty assignment\n", commandExecutor.execCommand("a="));
         commandExecutor.execCommand("exit");
         assertTrue(commandExecutor.isFinished());
     }

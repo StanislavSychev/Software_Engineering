@@ -85,4 +85,9 @@ public class Token {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        return content.hashCode();
+    }
+
 }
