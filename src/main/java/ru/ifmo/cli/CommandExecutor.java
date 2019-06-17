@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.Collectors;
+
 import ru.ifmo.cli.commands.*;
 
 /**
@@ -15,48 +17,41 @@ public class CommandExecutor {
     private boolean finished = false;
     private ProcessCommand prcessCommand = new ProcessCommand();
 
-    private static final Map<String, Command> COMMANDS_LIST = new HashMap<String, Command>() {
+    private final Map<String, Command> COMMANDS_LIST = new HashMap<String, Command>() {
         {
             put("echo", new Echo());
             put("pwd", new Pwd());
             put("wc", new Wc());
             put("cat", new Cat());
+            put("exit", new Exit());
+            put("assign", new Assign());
         }
     };
 
-    private String execute(List<Token> tokens) {
-        Token command = tokens.get(0);
-        if (command.getType() == Token.TokenType.ASSIGNMENT) {
-            return assign(tokens);
-        }
-        if (command.getContent().equals("exit")) {
+    private class Exit implements Command{
+
+        @Override
+        public String execute(List<String> args, Environment environment) {
             finished = true;
             return null;
         }
-        tokens.remove(0);
-        List<String> args = new ArrayList<>();
-        for (Token token : tokens) {
-            args.add(token.getContent());
+    }
+
+    private String execute(List<Token> tokens) {
+        Token command = tokens.remove(0);
+        List<String> args = tokens
+                .stream()
+                .map(Token::getContent)
+                .collect(Collectors.toList());
+        if (command.getType() == Token.TokenType.ASSIGNMENT) {
+            args.add(0, command.getContent());
+            command = new Token("assign", Token.TokenType.TEXT);
         }
         if (COMMANDS_LIST.containsKey(command.getContent())) {
             return COMMANDS_LIST.get(command.getContent()).execute(args, environment);
         }
         args.add(0, command.getContent());
         return prcessCommand.execute(args, environment);
-    }
-
-    private String assign(List<Token> tokens) {
-        int index = tokens.get(0).getContent().indexOf('=');
-        if (tokens.size() == 1 && tokens.get(0).getContent().length() - 1 == index) {
-            throw new SyntaxisException("empty assignment");
-        }
-        StringBuilder sb = new StringBuilder();
-        for (Token token : tokens) {
-            sb.append(token.getContent());
-        }
-        String fullCommand = sb.toString();
-        environment.setValue(fullCommand.substring(0, index), fullCommand.substring(index + 1));
-        return null;
     }
 
     /**
