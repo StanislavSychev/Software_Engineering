@@ -19,6 +19,7 @@ public class Parser {
     }
 
     /**
+     * Get next parsed command in line
      * @return List of tokens with next command
      */
     public List<Token> nextCommand() {
@@ -27,7 +28,7 @@ public class Parser {
             Token token = tokens.get(position);
             if (token.getType() == Token.TokenType.PIPE) {
                 if (res.isEmpty()) {
-                    throw new SyntaxisException("Pipe in the beginning found");
+                    throw new SyntaxException("Pipe in the beginning found");
                 }
                 position++;
                 break;

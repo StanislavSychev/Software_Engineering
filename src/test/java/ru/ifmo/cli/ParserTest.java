@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ParserTest extends TokenListTest {
 
-    @Test(expected = SyntaxisException.class)
+    @Test(expected = SyntaxException.class)
     public void testFail() {
         List<Token> failPipe = Arrays.asList(
                 new Token("|", Token.TokenType.PIPE),

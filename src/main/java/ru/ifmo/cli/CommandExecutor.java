@@ -1,6 +1,5 @@
 package ru.ifmo.cli;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -37,6 +36,11 @@ public class CommandExecutor {
         }
     }
 
+    /**
+     * executes parsed command
+     * @param tokens parsed command
+     * @return command result
+     */
     private String execute(List<Token> tokens) {
         Token command = tokens.remove(0);
         List<String> args = tokens
@@ -73,12 +77,13 @@ public class CommandExecutor {
             }
             if (finished || res == null) return "\n";
             return res;
-        } catch (SyntaxisException e) {
+        } catch (SyntaxException e) {
             return e.getMessage() + "\n";
         }
     }
 
     /**
+     * Check if exit command was typed
      * @return true if "exit" command was executed, false otherwise
      */
     public boolean isFinished() {

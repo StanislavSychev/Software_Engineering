@@ -2,7 +2,7 @@ package ru.ifmo.cli.commands;
 
 import ru.ifmo.cli.Command;
 import ru.ifmo.cli.Environment;
-import ru.ifmo.cli.SyntaxisException;
+import ru.ifmo.cli.SyntaxException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +10,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Cat command
+ */
 public class Cat implements Command {
+    /**
+     * Returns file content
+     * @param args        command arguments
+     * @param environment environment for command to get or change variables
+     * @return file as string
+     */
     @Override
     public String execute(List<String> args, Environment environment) {
         StringBuilder res = new StringBuilder();
@@ -19,7 +28,7 @@ public class Cat implements Command {
             try {
                 res.append(new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8));
             } catch (IOException e) {
-                throw new SyntaxisException("No such file: " + fileName);
+                throw new SyntaxException("No such file: " + fileName);
             }
         }
         return res.toString();

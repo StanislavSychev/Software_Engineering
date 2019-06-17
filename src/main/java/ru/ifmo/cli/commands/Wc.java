@@ -9,7 +9,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * wc command
+ */
 public class Wc implements Command {
+    /**
+     * Counts bytes, words and lines in files or given string
+     * @param args        command arguments
+     * @param environment environment for command to get or change variables
+     * @return
+     */
     @Override
     public String execute(List<String> args, Environment environment) {
         if (args.size() == 1) {
@@ -37,6 +46,11 @@ public class Wc implements Command {
         return res.toString();
     }
 
+    /**
+     * counts lines, words and bytes in string
+     * @param toCount string to get count
+     * @return counts as string joined by space
+     */
     private String count(String toCount) {
         int lines = toCount.split("\n").length;
         int words = toCount.split("\\W+").length;

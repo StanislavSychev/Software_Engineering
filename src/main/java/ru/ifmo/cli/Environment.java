@@ -12,6 +12,7 @@ public class Environment {
     private Map<String, String> variables = new HashMap<>();
 
     /**
+     * Set variable value
      * @param name name of new variable
      * @param value value of new variable
      */
@@ -20,6 +21,7 @@ public class Environment {
     }
 
     /**
+     * get variable value
      * @param name name of variable
      * @return value of variable or empty string
      */

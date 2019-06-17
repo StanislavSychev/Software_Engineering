@@ -21,6 +21,7 @@ public class Token {
     }
 
     /**
+     * Token type
      * @return Type of token
      */
     public TokenType getType() {
@@ -28,6 +29,7 @@ public class Token {
     }
 
     /**
+     * Token content
      * @return Content of Token
      */
     public String getContent() {

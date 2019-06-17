@@ -5,7 +5,16 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Starts external process
+ */
 public class ProcessCommand implements Command {
+    /**
+     * runs external process
+     * @param args        command arguments
+     * @param environment environment for command to get or change variables
+     * @return string returned by process
+     */
     @Override
     public String execute(List<String> args, Environment environment) {
         ProcessBuilder processBuilder = new ProcessBuilder(args);
@@ -14,7 +23,7 @@ public class ProcessCommand implements Command {
             process = processBuilder.start();
 
         } catch (IOException e) {
-            throw new SyntaxisException("command " + args.get(0) + " not found");
+            throw new SyntaxException("command " + args.get(0) + " not found");
         }
 
         try {
@@ -30,7 +39,7 @@ public class ProcessCommand implements Command {
 
         InputStream inputStream = process.getInputStream();
         String result = "";
-        try(Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
+        try (Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
             result = s.hasNext() ? s.next() : "";
         }
         return result;

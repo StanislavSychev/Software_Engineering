@@ -9,6 +9,7 @@ import java.util.List;
 public class Tokenizer {
 
     /**
+     * Splits line into tokens
      * @param input String to tokenize
      * @param environment Environment with variables value
      * @return List of tokens generated from input string
@@ -47,7 +48,7 @@ public class Tokenizer {
                     i = num + 1;
                     continue;
                 } else {
-                    throw new SyntaxisException("No pair for a quote found");
+                    throw new SyntaxException("No pair for a quote found");
                 }
             }
             if (symbol == '|') {
