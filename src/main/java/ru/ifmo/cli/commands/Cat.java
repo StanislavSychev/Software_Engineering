@@ -7,6 +7,7 @@ import ru.ifmo.cli.SyntaxException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Cat implements Command {
             String fileName = args.get(i);
             try {
                 res.append(new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8));
-            } catch (IOException e) {
+            } catch (IOException | InvalidPathException e) {
                 throw new SyntaxException("No such file: " + fileName);
             }
         }
