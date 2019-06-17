@@ -18,7 +18,7 @@ public class Pwd implements Command {
      * @return current directory
      */
     @Override
-    public String execute(List<String> args, Environment environment) {
+    public String execute(List<String> args, Environment environment, boolean pipe) {
         if (!args.isEmpty()) {
             throw new SyntaxException("too many arguments");
         }

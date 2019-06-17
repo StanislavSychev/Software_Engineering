@@ -30,7 +30,7 @@ public class CommandExecutor {
     private class Exit implements Command{
 
         @Override
-        public String execute(List<String> args, Environment environment) {
+        public String execute(List<String> args, Environment environment, boolean pipe) {
             finished = true;
             return null;
         }
@@ -41,7 +41,7 @@ public class CommandExecutor {
      * @param tokens parsed command
      * @return command result
      */
-    private String execute(List<Token> tokens) {
+    private String execute(List<Token> tokens, boolean pipe) {
         Token command = tokens.remove(0);
         List<String> args = tokens
                 .stream()
@@ -52,10 +52,10 @@ public class CommandExecutor {
             command = new Token("assign", Token.TokenType.TEXT);
         }
         if (COMMANDS_LIST.containsKey(command.getContent())) {
-            return COMMANDS_LIST.get(command.getContent()).execute(args, environment);
+            return COMMANDS_LIST.get(command.getContent()).execute(args, environment, pipe);
         }
         args.add(0, command.getContent());
-        return prcessCommand.execute(args, environment);
+        return prcessCommand.execute(args, environment, pipe);
     }
 
     /**
@@ -68,12 +68,14 @@ public class CommandExecutor {
             Parser parser = new Parser(tokens);
             List<Token> commandTokens = parser.nextCommand();
             String res = "";
+            boolean pipe = false;
             while (!commandTokens.isEmpty() && !finished) {
-                res = execute(commandTokens);
+                res = execute(commandTokens, pipe);
                 commandTokens = parser.nextCommand();
                 if (!commandTokens.isEmpty() && res != null) {
                     commandTokens.add(new Token(res, Token.TokenType.TEXT));
                 }
+                pipe = true;
             }
             if (finished || res == null) return "\n";
             return res;

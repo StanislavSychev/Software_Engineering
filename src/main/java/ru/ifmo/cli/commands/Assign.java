@@ -17,7 +17,7 @@ public class Assign implements Command {
      * @return null
      */
     @Override
-    public String execute(List<String> args, Environment environment) {
+    public String execute(List<String> args, Environment environment, boolean pype) {
         int index = args.get(0).indexOf('=');
         if (args.size() == 1 && args.get(0).length() - 1 == index) {
             throw new SyntaxException("empty assignment");

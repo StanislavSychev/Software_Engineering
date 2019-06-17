@@ -16,7 +16,7 @@ public class ProcessCommand implements Command {
      * @return string returned by process
      */
     @Override
-    public String execute(List<String> args, Environment environment) {
+    public String execute(List<String> args, Environment environment, boolean pipe) {
         ProcessBuilder processBuilder = new ProcessBuilder(args);
         Process process;
         try {

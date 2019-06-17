@@ -22,13 +22,16 @@ public class Cat implements Command {
      * @return file as string
      */
     @Override
-    public String execute(List<String> args, Environment environment) {
+    public String execute(List<String> args, Environment environment, boolean pipe) {
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < args.size(); i++) {
             String fileName = args.get(i);
             try {
                 res.append(new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8));
             } catch (IOException | InvalidPathException e) {
+                if (pipe) {
+                    return fileName;
+                }
                 throw new SyntaxException("No such file: " + fileName);
             }
         }

@@ -18,7 +18,7 @@ public class Echo implements Command {
      * @return arguments joined by space
      */
     @Override
-    public String execute(List<String> args, Environment environment) {
+    public String execute(List<String> args, Environment environment, boolean pipe) {
         return args.stream().collect(Collectors.joining(" ", "", "\n"));
     }
 }

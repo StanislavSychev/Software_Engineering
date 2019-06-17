@@ -20,7 +20,7 @@ public class Wc implements Command {
      * @return
      */
     @Override
-    public String execute(List<String> args, Environment environment) {
+    public String execute(List<String> args, Environment environment, boolean pipe) {
         if (args.size() == 1) {
             try {
                 return count(new String(Files.readAllBytes(Paths.get(args.get(0))), StandardCharsets.UTF_8));

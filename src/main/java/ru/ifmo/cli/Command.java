@@ -15,5 +15,5 @@ public interface Command {
      * @param environment environment for command to get or change variables
      * @return result of command execution
      */
-    String execute(List<String> args, Environment environment);
+    String execute(List<String> args, Environment environment, boolean pipe);
 }
