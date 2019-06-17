@@ -6,6 +6,7 @@ import ru.ifmo.cli.Environment;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Wc implements Command {
         if (args.size() == 1) {
             try {
                 return count(new String(Files.readAllBytes(Paths.get(args.get(0))), StandardCharsets.UTF_8));
-            } catch (IOException e) {
+            } catch (IOException | InvalidPathException e) {
                 return count(args.get(0));
             }
         }
@@ -35,7 +36,7 @@ public class Wc implements Command {
                 res.append(fileName);
                 res.append(": ");
                 res.append(count(new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8)));
-            } catch (IOException e) {
+            } catch (IOException | InvalidPathException e) {
                 res = new StringBuilder();
                 for (String part : args) {
                     res.append(part);
