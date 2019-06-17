@@ -101,13 +101,4 @@ public class Tokenizer {
         }
         return tokens;
     }
-
-    public static void main(String[] args) {
-        Environment e = new Environment();
-        e.setValue("b", "ex");
-        e.setValue("c", "it");
-        //List<Token> t = tokenize("a= \"$b asd\"", e);
-        List<Token> t = tokenize("", e);
-        System.out.println(t);
-    }
 }
